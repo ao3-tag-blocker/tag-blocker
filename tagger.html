@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<meta charset="utf-8"/>
+<html>
+<body>
+<!-- Stuff needed:
+REQUIRED: 
+	Interface for excluding tags by name ✓ 
+	Interface for excluding archive warnings ✓
+	Interface for excluding ratings ✓
+	Interface for excluding tags by number (sections for character, fandom, relationship, and additional) ✓
+	Exclude number tags from searchbar searches (-relationship_ids: works??? space not optional, apparently) ✓
+TO ADD (?):
+	Interface for excluding/including crossovers and completion status and language
+	Interface for excluding categories
+	Interface for excluding users (creators: username, space not optional, apparently)
+SECONDARY:
+	Ability to have more than one saved set of excluded tags (IE toggle between excluding abo and m rated fics and excluding mpreg and e rated fics)
+	Ability to save searches?
+	Ability to swap colors in the pop up menu?
+-->
+<!--Field for adding tags to exclude-->
+<button type="button" class="collapsible" id = 'nameButton'>Block Tags by Name</button>
+<div class="content" id = 'nameContent'>
+	<label for="addedTagsWord" class='tagLabel' id='wordBlockedLabel'>Currently Blocked:</label>
+	<p id='addedTagsWord' class='displayTags'></p><br>
+	<label for="addTagWord" class='label'>Add Tags to Block Here:</label><br>
+	<input type="text" id="addTagWord" name="addTagWord" class='input'>
+	<button type='button' id='stupidButton' class='button'>Add Tag</button><br>
+
+	<label for='removeTagsWord' class='label'>Remove Blocked Tags Here:</label><br>
+	<select id='removeTagsWord' class='select'></select>
+	<button type='button' class='button' id='removeTagsWordButton'>Remove</button><br>
+</div>
+
+
+<!--Field for selecting archive warnings to exclude - value is the tag number on ao3 -->
+<button type="button" class="collapsible" id='warningButton'>Block Archive Warnings</button>
+<div class="content" id='warningContent'>
+<form>
+  <input type="checkbox" id="warning1" name="warning1" value="14">
+  <label for="warning1" class='warning'>Creator Chose Not To Use Archive Warnings</label><br>
+  <input type="checkbox" id="warning2" name="warning2" value="17">
+  <label for="warning2" class='warning'>Graphic Depictions Of Violence</label><br>
+  <input type="checkbox" id="warning3" name="warning3" value="18">
+  <label for="warning3" class='warning'>Major Character Death</label><br>
+  <input type="checkbox" id="warning4" name="warning4" value="20">
+  <label for="warning4" class='warning'>Underage</label><br>
+  <input type="checkbox" id="warning5" name="warning5" value="19">
+  <label for="warning5" class='warning'>Rape/Non-Con</label><br>
+</form>
+</div>
+
+<!-- Field for selecting ratings to exclude - value is tag number on ao3 -->
+<button type="button" class="collapsible" id ='ratingButton'>Block Ratings</button>
+<div class="content" id='ratingContent'>
+<form>
+  <input type="checkbox" id="rating1" name="rating1" value="9">
+  <label for="rating1" class='rating'>Not Rated</label><br>
+  <input type="checkbox" id="rating2" name="rating2" value="10">
+  <label for="rating2" class='rating'>General Audiences</label><br>
+  <input type="checkbox" id="rating3" name="rating3" value="11">
+  <label for="rating3" class='rating'>Teen and Up Audiences</label><br>
+  <input type="checkbox" id="rating4" name="rating4" value="12">
+  <label for="rating4" class='rating'>Mature</label><br>
+  <input type="checkbox" id="rating5" name="rating5" value="13">
+  <label for="rating5" class='rating'>Explicit</label><br>
+</form>
+</div>
+
+<!-- Menu for adding tag numbers to exclude -->
+<button type="button" class="collapsible" id='numButton'>Block Tags by Number</button>
+<div class="content" id='numContent'>
+	<label for='addedTagsNum' class='tagLabel'>Currently Blocked:</label>
+	<p id='addedTagsNum' class='displayTags'></p>
+	<label for=addNumFandom class='label'>Fandom ID:</label><br>
+	<input type="text" id="addNumFandom" name="addNumFandom" class='input'><br>
+	<label for=addNumChar>Character ID:</label><br>
+	<input type="text" id="addNumChar" name="addNumChar" class='input'><br>
+	<label for=addNumR>Relationship ID:</label><br>
+	<input type="text" id="addNumR" name="addNumR" class='input'><br>
+	<label for=addNumAddi>Additional Tag ID:</label><br>
+	<input type="text" id="addNumAddi" name="addNumAddi" class='input'><br>
+	<button type="button" id='addTagsNum' class='bigButton'>Update Blocked Tags</button><br>
+	<label for='removeTagsNum' class='label'>Remove Blocked Tags Here:</label><br>
+	<select id='removeTagsNum' class='select'></select>
+	<button type='button' id='removeTagsNumButton' class='button'>Remove</button><br>
+</div>
+
+<style>
+.collapsible {
+  background-color: #990000;
+  color: #FFFFFF;
+  cursor: pointer;
+  padding: 15px;
+  width: 300px;
+  border-style: outset;
+  border-color: white;
+  border-radius : 10px;
+  text-align: left;
+  outline: none;
+  font-size: 14px;
+  margin-top : 5px;
+  display : block;
+}
+
+.active, .collapsible:hover {
+  background-color: #870000;
+  border-style : inset;
+}
+
+.content {
+  padding-top : 10px;
+  padding-bottom : 10px;
+  padding-left : 10px;
+  padding-right : 10px;
+  border-radius : 5px;
+  display: none;
+  overflow: hidden; 
+  background-color: #f1f1f1;
+}
+
+.tagLabel{
+	display : block;
+}
+
+.label{
+}
+
+.displayTags{
+	width : 95%;
+	box-sizing: border-box;
+	padding-left : 5px;
+	padding-top : 5px;
+	padding-bottom : 5px;
+	padding-right : 5px;
+	border-style : double;
+	background-color : white;
+	display : block;
+}
+
+.select{
+	width : 70%;
+}
+
+.input{
+	margin-bottom: 5px;
+	width: 68%
+}
+
+.button{
+	border-style: solid;
+	border-color: gray;
+	border-radius: 4px;
+	border-width: thin;
+	cursor: pointer;
+	padding: 3px;
+	width: 25%;
+	
+}
+
+.active, .button:hover {
+	background-color: #A6F4FF;
+	border-color: #26A0DA;
+}
+
+
+
+</style>
+
+</body>
+
+<script src='background.js'></script>
+<script src="tagger.js"></script>
+
+</html>
